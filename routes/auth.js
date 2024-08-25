@@ -6,11 +6,11 @@ const User = require('../models/User');
 const router = express.Router();
 
 router.post('/register', async (req, res) => {
-  const { username, password, role } = req.body;
+  const { username, password } = req.body;
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = await User.create({ username, password: hashedPassword, role });
+    const user = await User.create({ username, password: hashedPassword });
 
     res.json({ message: 'User registered', user });
   } catch (err) {
